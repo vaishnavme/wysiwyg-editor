@@ -1,7 +1,9 @@
+import { Editor } from "./components/editor";
+
 const App = () => {
   return (
-    <div>
-      <h1 className="text-2xl">Editor</h1>
+    <div className="mx-auto p-6 max-w-4xl">
+      <Editor />
     </div>
   );
 };
