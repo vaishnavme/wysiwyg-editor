@@ -10,3 +10,12 @@
 body {
   font-family: "IBM Plex Serif", system-ui;
 }
+
+/* Tasklist styles */
+.prose ul[data-type="taskList"] li {
+  @apply flex items-center gap-x-4 list-disc;
+}
+
+.prose ul[data-type="taskList"] {
+  @apply pl-0;
+}
