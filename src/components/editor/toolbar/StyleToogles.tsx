@@ -1,26 +1,13 @@
 import { Editor } from "@tiptap/react";
 import { Toggle } from "@/components/ui/toggle";
 import {
-  BoldIcon,
-  ChevronDown,
-  HeadingIcon,
-  ItalicIcon,
-  List,
-  ListOrdered,
-  ListTodo,
-  Minus,
-  Quote,
-  StrikethroughIcon,
-  TypeIcon,
-  UnderlineIcon,
-} from "lucide-react";
-import {
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import Icon from "@/components/icons";
 
 const getActiveProps = (isActive = false) => {
   const activeProps = {
@@ -42,7 +29,7 @@ export const Bold = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleBold().run()}
     {...getActiveProps(editor.isActive("bold"))}
   >
-    <BoldIcon size={16} />
+    <Icon.TextBoldIcon size={16} />
   </Toggle>
 );
 
@@ -52,7 +39,7 @@ export const Italic = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleItalic().run()}
     {...getActiveProps(editor.isActive("italic"))}
   >
-    <ItalicIcon size={16} />
+    <Icon.TextItalicIcon size={16} />
   </Toggle>
 );
 
@@ -62,7 +49,7 @@ export const Strike = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleStrike().run()}
     {...getActiveProps(editor.isActive("strike"))}
   >
-    <StrikethroughIcon size={16} />
+    <Icon.TextStrikethroughIcon size={16} />
   </Toggle>
 );
 
@@ -71,7 +58,7 @@ export const Text = ({ editor }: { editor: Editor }) => (
     variant="outline"
     onClick={() => editor.chain().focus().setParagraph().run()}
   >
-    <TypeIcon size={16} />
+    <Icon.TextIcon size={16} />
   </Toggle>
 );
 
@@ -80,8 +67,8 @@ export const Heading = ({ editor }: { editor: Editor }) => {
     <Menubar>
       <MenubarMenu>
         <MenubarTrigger>
-          <HeadingIcon size={16} />
-          <ChevronDown size={14} />
+          <Icon.HeadingIcon size={16} />
+          <Icon.ArrowDown01Icon size={14} />
         </MenubarTrigger>
         <MenubarContent className="w-24">
           <MenubarItem
@@ -111,7 +98,7 @@ export const BulletList = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleBulletList().run()}
     {...getActiveProps(editor.isActive("bulletList"))}
   >
-    <List size={16} />
+    <Icon.BulletListIcon size={16} />
   </Toggle>
 );
 
@@ -121,7 +108,7 @@ export const OrderedList = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleOrderedList().run()}
     {...getActiveProps(editor.isActive("orderedList"))}
   >
-    <ListOrdered size={16} />
+    <Icon.NumberListIcon size={16} />
   </Toggle>
 );
 
@@ -131,7 +118,7 @@ export const Blockquote = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleBlockquote().run()}
     {...getActiveProps(editor.isActive("blockquote"))}
   >
-    <Quote size={16} />
+    <Icon.QuoteDownIcon size={16} />
   </Toggle>
 );
 
@@ -142,7 +129,7 @@ export const Divider = ({ editor }: { editor: Editor }) => (
     aria-pressed={false}
     data-state="off"
   >
-    <Minus size={16} />
+    <Icon.SolidLine01Icon size={16} />
   </Toggle>
 );
 
@@ -152,7 +139,7 @@ export const TodoList = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleTaskList().run()}
     {...getActiveProps(editor.isActive("taskList"))}
   >
-    <ListTodo size={16} />
+    <Icon.CheckListIcon size={16} />
   </Toggle>
 );
 
@@ -162,6 +149,6 @@ export const Underline = ({ editor }: { editor: Editor }) => (
     onClick={() => editor.chain().focus().toggleUnderline().run()}
     {...getActiveProps(editor.isActive("underline"))}
   >
-    <UnderlineIcon size={16} />
+    <Icon.TextUnderlineIcon size={16} />
   </Toggle>
 );
