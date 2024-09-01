@@ -838,7 +838,226 @@ const RecordIcon = ({
   </svg>
 );
 
+const TextAlignLeft01Icon = ({
+  size = 24,
+  fill = "none",
+  stroke = "currentColor",
+  strokeWidth = 2,
+  ...props
+}: React.SVGProps<SVGSVGElement> & {
+  size?: number;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    color={"#000000"}
+    fill={fill}
+    {...props}
+  >
+    <path
+      d="M9 4.5H19"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9 9.5H14"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9 14.5H19"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9 19.5H14"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5 3V21"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const TextAlignRight01Icon = ({
+  size = 24,
+  fill = "none",
+  stroke = "currentColor",
+  strokeWidth = 2,
+  ...props
+}: React.SVGProps<SVGSVGElement> & {
+  size?: number;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    color={"#000000"}
+    fill={fill}
+    {...props}
+  >
+    <path
+      d="M5 4.5H15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 9.5H15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M5 14.5H15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10 19.5H15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19 3V21"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const TextAlignCenterIcon = ({
+  size = 24,
+  fill = "none",
+  stroke = "currentColor",
+  strokeWidth = 2,
+  ...props
+}: React.SVGProps<SVGSVGElement> & {
+  size?: number;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    color={"#000000"}
+    fill={fill}
+    {...props}
+  >
+    <path
+      d="M3 3H21"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8 9H16"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3 15H21"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8 21H16"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const SourceCodeIcon = ({
+  size = 24,
+  fill = "none",
+  stroke = "currentColor",
+  strokeWidth = 2,
+  ...props
+}: React.SVGProps<SVGSVGElement> & {
+  size?: number;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    color={"#000000"}
+    fill={fill}
+    {...props}
+  >
+    <path
+      d="M17 8L18.8398 9.85008C19.6133 10.6279 20 11.0168 20 11.5C20 11.9832 19.6133 12.3721 18.8398 13.1499L17 15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M7 8L5.16019 9.85008C4.38673 10.6279 4 11.0168 4 11.5C4 11.9832 4.38673 12.3721 5.16019 13.1499L7 15"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M14.5 4L9.5 20"
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const Icon = {
+  SourceCodeIcon,
+  TextAlignLeft01Icon,
+  TextAlignRight01Icon,
+  TextAlignCenterIcon,
   RecordIcon,
   ArrowRight01Icon,
   Tick02Icon,

@@ -152,3 +152,43 @@ export const Underline = ({ editor }: { editor: Editor }) => (
     <Icon.TextUnderlineIcon size={16} />
   </Toggle>
 );
+
+export const Codeblock = ({ editor }: { editor: Editor }) => (
+  <Toggle
+    variant="outline"
+    onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+    {...getActiveProps(editor.isActive("codeblock"))}
+  >
+    <Icon.SourceCodeIcon size={16} />
+  </Toggle>
+);
+
+export const TextAlign = ({ editor }: { editor: Editor }) => {
+  return (
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger>
+          <Icon.TextAlignLeft01Icon size={16} />
+          <Icon.ArrowDown01Icon size={14} />
+        </MenubarTrigger>
+        <MenubarContent className="w-24">
+          <MenubarItem
+            onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          >
+            Left Align
+          </MenubarItem>
+          <MenubarItem
+            onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          >
+            Center Align
+          </MenubarItem>
+          <MenubarItem
+            onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          >
+            Right Align
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  );
+};

@@ -3,12 +3,14 @@ import {
   Blockquote,
   Bold,
   BulletList,
+  Codeblock,
   Divider,
   Heading,
   Italic,
   OrderedList,
   Strike,
   Text,
+  TextAlign,
   TodoList,
   Underline,
 } from "./StyleToogles";
@@ -27,7 +29,8 @@ type ExtensionKey =
   | "heading"
   | "paragraph"
   | "taskList"
-  | "underline";
+  | "underline"
+  | "textAlign";
 
 type ExtensionMap = Record<ExtensionKey, ExtensionKey>;
 
@@ -46,6 +49,7 @@ const extensionMap: ExtensionMap = {
   paragraph: "paragraph",
   taskList: "taskList",
   underline: "underline",
+  textAlign: "textAlign",
 };
 
 interface Extension extends TiptapExtension {
@@ -63,7 +67,10 @@ const Toolbar = (props: Props) => {
     editor?.extensionManager?.extensions.filter((ext): ext is Extension =>
       Object.prototype.hasOwnProperty.call(extensionMap, ext.name)
     ) || [];
-
+  console.log(
+    "editor?.extensionManager?.extensions: ",
+    editor?.extensionManager?.extensions
+  );
   const activeExtensions = configuredExtension.reduce<
     Record<ExtensionKey, Extension>
   >((prev, curr) => {
@@ -93,6 +100,10 @@ const Toolbar = (props: Props) => {
         <Underline editor={editor} />
       ) : null}
 
+      {activeExtensions[extensionMap.codeBlock] ? (
+        <Codeblock editor={editor} />
+      ) : null}
+
       {activeExtensions[extensionMap.heading] ? (
         <Heading editor={editor} />
       ) : null}
@@ -115,6 +126,10 @@ const Toolbar = (props: Props) => {
 
       {activeExtensions[extensionMap.horizontalRule] ? (
         <Divider editor={editor} />
+      ) : null}
+
+      {activeExtensions[extensionMap.textAlign] ? (
+        <TextAlign editor={editor} />
       ) : null}
     </div>
   );
