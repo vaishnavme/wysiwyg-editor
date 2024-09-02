@@ -14,43 +14,8 @@ import {
   TodoList,
   Underline,
 } from "./StyleToogles";
-
-type ExtensionKey =
-  | "bold"
-  | "italic"
-  | "strike"
-  | "link"
-  | "code"
-  | "codeBlock"
-  | "bulletList"
-  | "orderedList"
-  | "horizontalRule"
-  | "blockquote"
-  | "heading"
-  | "paragraph"
-  | "taskList"
-  | "underline"
-  | "textAlign";
-
-type ExtensionMap = Record<ExtensionKey, ExtensionKey>;
-
-const extensionMap: ExtensionMap = {
-  bold: "bold",
-  italic: "italic",
-  strike: "strike",
-  link: "link",
-  code: "code",
-  codeBlock: "codeBlock",
-  bulletList: "bulletList",
-  orderedList: "orderedList",
-  horizontalRule: "horizontalRule",
-  blockquote: "blockquote",
-  heading: "heading",
-  paragraph: "paragraph",
-  taskList: "taskList",
-  underline: "underline",
-  textAlign: "textAlign",
-};
+import { extensionMap } from "../utils/constants";
+import { ExtensionKey } from "../utils/editor.types";
 
 interface Extension extends TiptapExtension {
   name: ExtensionKey;
@@ -67,10 +32,7 @@ const Toolbar = (props: Props) => {
     editor?.extensionManager?.extensions.filter((ext): ext is Extension =>
       Object.prototype.hasOwnProperty.call(extensionMap, ext.name)
     ) || [];
-  console.log(
-    "editor?.extensionManager?.extensions: ",
-    editor?.extensionManager?.extensions
-  );
+
   const activeExtensions = configuredExtension.reduce<
     Record<ExtensionKey, Extension>
   >((prev, curr) => {
@@ -81,7 +43,11 @@ const Toolbar = (props: Props) => {
   }, {} as Record<ExtensionKey, Extension>);
 
   return (
-    <div className="flex items-center gap-x-2 my-4">
+    <div className="border rounded-lg p-1 flex items-center gap-x-1 border-neutral-200 bg-transparent shadow-sm hover:text-neutral-900 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 mb-6">
+      {activeExtensions[extensionMap.heading] ? (
+        <Heading editor={editor} />
+      ) : null}
+
       {activeExtensions[extensionMap.bold] ? <Bold editor={editor} /> : null}
 
       {activeExtensions[extensionMap.italic] ? (
@@ -102,10 +68,6 @@ const Toolbar = (props: Props) => {
 
       {activeExtensions[extensionMap.codeBlock] ? (
         <Codeblock editor={editor} />
-      ) : null}
-
-      {activeExtensions[extensionMap.heading] ? (
-        <Heading editor={editor} />
       ) : null}
 
       {activeExtensions[extensionMap.bulletList] ? (

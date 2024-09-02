@@ -86,7 +86,9 @@ export const Heading = ({ editor }: { editor: Editor }) => {
           {levels.map((level) => (
             <MenubarItem key={`level-${level}`}>
               <button
-                onClick={() => editor.commands.setHeading({ level })}
+                onClick={() =>
+                  editor.chain().focus().toggleHeading({ level }).run()
+                }
                 type="button"
               >
                 Heading {level}
@@ -163,30 +165,40 @@ export const Codeblock = ({ editor }: { editor: Editor }) => (
   </Toggle>
 );
 
+const alignOptions = ["left", "right", "center"] as const;
+
+const textAlignMap: Record<(typeof alignOptions)[number], JSX.Element> = {
+  left: <Icon.TextAlignLeft01Icon size={16} />,
+  right: <Icon.TextAlignRight01Icon size={16} />,
+  center: <Icon.TextAlignCenterIcon size={16} />,
+};
+
 export const TextAlign = ({ editor }: { editor: Editor }) => {
+  const activeAlignment = alignOptions.find((option) =>
+    editor.isActive({ textAlign: option })
+  );
+
+  const icon = activeAlignment
+    ? textAlignMap[activeAlignment]
+    : textAlignMap.left;
+
   return (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>
-          <Icon.TextAlignLeft01Icon size={16} />
+        <MenubarTrigger className="w-24 flex items-center justify-between">
+          {icon}
           <Icon.ArrowDown01Icon size={14} />
         </MenubarTrigger>
-        <MenubarContent className="w-24">
-          <MenubarItem
-            onClick={() => editor.chain().focus().setTextAlign("left").run()}
-          >
-            Left Align
-          </MenubarItem>
-          <MenubarItem
-            onClick={() => editor.chain().focus().setTextAlign("center").run()}
-          >
-            Center Align
-          </MenubarItem>
-          <MenubarItem
-            onClick={() => editor.chain().focus().setTextAlign("right").run()}
-          >
-            Right Align
-          </MenubarItem>
+        <MenubarContent>
+          {alignOptions.map((option) => (
+            <MenubarItem
+              key={`align-${option}`}
+              className="capitalize"
+              onClick={() => editor.chain().focus().setTextAlign(option).run()}
+            >
+              {option} Align
+            </MenubarItem>
+          ))}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
