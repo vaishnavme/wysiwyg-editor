@@ -8,6 +8,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import Icon from "@/components/icons";
+import { Level } from "../utils/editor.types";
 
 const getActiveProps = (isActive = false) => {
   const activeProps = {
@@ -25,7 +26,6 @@ const getActiveProps = (isActive = false) => {
 
 export const Bold = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleBold().run()}
     {...getActiveProps(editor.isActive("bold"))}
   >
@@ -35,7 +35,6 @@ export const Bold = ({ editor }: { editor: Editor }) => (
 
 export const Italic = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleItalic().run()}
     {...getActiveProps(editor.isActive("italic"))}
   >
@@ -45,7 +44,6 @@ export const Italic = ({ editor }: { editor: Editor }) => (
 
 export const Strike = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleStrike().run()}
     {...getActiveProps(editor.isActive("strike"))}
   >
@@ -55,37 +53,46 @@ export const Strike = ({ editor }: { editor: Editor }) => (
 
 export const Text = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().setParagraph().run()}
+    aria-pressed={false}
+    data-state="off"
   >
     <Icon.TextIcon size={16} />
   </Toggle>
 );
 
+const levels: Level[] = [1, 2, 3];
+
 export const Heading = ({ editor }: { editor: Editor }) => {
+  const activeHeading = levels.find((level) =>
+    editor?.isActive("heading", { level })
+  );
+
   return (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger>
-          <Icon.HeadingIcon size={16} />
+        <MenubarTrigger className="font-normal w-40 flex items-center justify-between">
+          <div>{activeHeading ? <>Heading {activeHeading}</> : <>Text</>}</div>
           <Icon.ArrowDown01Icon size={14} />
         </MenubarTrigger>
-        <MenubarContent className="w-24">
+
+        <MenubarContent>
           <MenubarItem
-            onClick={() => editor.commands.toggleHeading({ level: 1 })}
+            onClick={() => editor.chain().focus().setParagraph().run()}
           >
-            Heading 1
+            Text
           </MenubarItem>
-          <MenubarItem
-            onClick={() => editor.commands.toggleHeading({ level: 2 })}
-          >
-            Heading 2
-          </MenubarItem>
-          <MenubarItem
-            onClick={() => editor.commands.toggleHeading({ level: 3 })}
-          >
-            Heading 3
-          </MenubarItem>
+
+          {levels.map((level) => (
+            <MenubarItem key={`level-${level}`}>
+              <button
+                onClick={() => editor.commands.setHeading({ level })}
+                type="button"
+              >
+                Heading {level}
+              </button>
+            </MenubarItem>
+          ))}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
@@ -94,7 +101,6 @@ export const Heading = ({ editor }: { editor: Editor }) => {
 
 export const BulletList = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleBulletList().run()}
     {...getActiveProps(editor.isActive("bulletList"))}
   >
@@ -104,7 +110,6 @@ export const BulletList = ({ editor }: { editor: Editor }) => (
 
 export const OrderedList = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleOrderedList().run()}
     {...getActiveProps(editor.isActive("orderedList"))}
   >
@@ -114,7 +119,6 @@ export const OrderedList = ({ editor }: { editor: Editor }) => (
 
 export const Blockquote = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleBlockquote().run()}
     {...getActiveProps(editor.isActive("blockquote"))}
   >
@@ -124,7 +128,6 @@ export const Blockquote = ({ editor }: { editor: Editor }) => (
 
 export const Divider = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().setHorizontalRule().run()}
     aria-pressed={false}
     data-state="off"
@@ -135,7 +138,6 @@ export const Divider = ({ editor }: { editor: Editor }) => (
 
 export const TodoList = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleTaskList().run()}
     {...getActiveProps(editor.isActive("taskList"))}
   >
@@ -145,7 +147,6 @@ export const TodoList = ({ editor }: { editor: Editor }) => (
 
 export const Underline = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleUnderline().run()}
     {...getActiveProps(editor.isActive("underline"))}
   >
@@ -155,7 +156,6 @@ export const Underline = ({ editor }: { editor: Editor }) => (
 
 export const Codeblock = ({ editor }: { editor: Editor }) => (
   <Toggle
-    variant="outline"
     onClick={() => editor.chain().focus().toggleCodeBlock().run()}
     {...getActiveProps(editor.isActive("codeblock"))}
   >
