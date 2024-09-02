@@ -71,7 +71,7 @@ export const Heading = ({ editor }: { editor: Editor }) => {
   return (
     <Menubar>
       <MenubarMenu>
-        <MenubarTrigger className="font-normal w-40 flex items-center justify-between">
+        <MenubarTrigger className="font-normal w-32 flex items-center justify-between">
           <div>{activeHeading ? <>Heading {activeHeading}</> : <>Text</>}</div>
           <Icon.ArrowDown01Icon size={14} />
         </MenubarTrigger>
@@ -84,15 +84,13 @@ export const Heading = ({ editor }: { editor: Editor }) => {
           </MenubarItem>
 
           {levels.map((level) => (
-            <MenubarItem key={`level-${level}`}>
-              <button
-                onClick={() =>
-                  editor.chain().focus().toggleHeading({ level }).run()
-                }
-                type="button"
-              >
-                Heading {level}
-              </button>
+            <MenubarItem
+              key={`level-${level}`}
+              onClick={() =>
+                editor.chain().focus().toggleHeading({ level }).run()
+              }
+            >
+              Heading {level}
             </MenubarItem>
           ))}
         </MenubarContent>
