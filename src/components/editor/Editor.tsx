@@ -2,6 +2,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import extensions from "./extensions";
 import { forwardRef, useImperativeHandle } from "react";
 import Toolbar from "./toolbar/Toolbar";
+import { content } from "./utils/content";
 
 interface EditorProps {
   editable?: boolean;
@@ -19,6 +20,7 @@ const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
   const editor = useEditor({
     extensions,
     editable,
+    content,
     editorProps: {
       attributes: {
         class:

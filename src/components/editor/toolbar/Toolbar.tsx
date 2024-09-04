@@ -44,7 +44,7 @@ const Toolbar = (props: Props) => {
 
   return (
     <div className="sticky top-10 bg-white z-50 mb-20">
-      <div className="border flex-wrap rounded-lg p-1 flex items-center gap-x-1 border-neutral-200 shadow-sm hover:text-neutral-900 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 ">
+      <div className="border flex-wrap rounded-lg p-1 flex items-center gap-2 border-neutral-200 shadow-sm hover:text-neutral-900 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 ">
         {activeExtensions[extensionMap.heading] ? (
           <Heading editor={editor} />
         ) : null}
