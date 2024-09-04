@@ -19,6 +19,7 @@ const extensions = [
   }),
   Link.extend({ inclusive: false }).configure({
     autolink: true,
+    openOnClick: false,
     HTMLAttributes: {
       rel: "noopener noreferrer",
       target: "_blank",
