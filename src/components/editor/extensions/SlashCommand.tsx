@@ -1,4 +1,10 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { Extension } from "@tiptap/core";
 import Suggestion, { SuggestionProps } from "@tiptap/suggestion";
 import { Editor, Range } from "@tiptap/react";
@@ -28,6 +34,27 @@ const slashCommandList: SlashCommand[] = [
     icon: <Icon.TextIcon size={20} />,
     command: ({ editor, range }) =>
       editor.chain().focus().deleteRange(range).setParagraph().run(),
+  },
+  {
+    label: "Heading 1",
+    subText: "Big section heading.",
+    icon: <Icon.Heading01Icon size={20} />,
+    command: ({ editor, range }) =>
+      editor.chain().focus().deleteRange(range).setHeading({ level: 1 }).run(),
+  },
+  {
+    label: "Heading 2",
+    subText: "Medium section heading.",
+    icon: <Icon.Heading02Icon size={20} />,
+    command: ({ editor, range }) =>
+      editor.chain().focus().deleteRange(range).setHeading({ level: 2 }).run(),
+  },
+  {
+    label: "Heading 3",
+    subText: "Small section heading.",
+    icon: <Icon.Heading03Icon size={20} />,
+    command: ({ editor, range }) =>
+      editor.chain().focus().deleteRange(range).setHeading({ level: 3 }).run(),
   },
   {
     label: "Blockquote",
@@ -90,6 +117,7 @@ const CommandList = forwardRef<
   { onKeyDown: (params: { event: KeyboardEvent }) => boolean },
   CommandListProps
 >(({ items, command }, ref) => {
+  const slashListRef = useRef<HTMLDivElement[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const selectItem = (index: number) => {
@@ -136,25 +164,40 @@ const CommandList = forwardRef<
   if (!items?.length) return null;
 
   return (
-    <div className="bg-white max-h-96 border rounded-lg overflow-hidden shadow-xl w-64">
+    <div className="bg-white h-72 overflow-y-auto border rounded-lg overflow-hidden shadow-xl w-64">
       <ul>
-        {items.map((option, index) => (
-          <li key={option.label}>
-            <button
-              type="button"
-              onClick={() => selectItem(index)}
-              className={`text-black flex items-center gap-x-4 px-4 py-2 hover:bg-neutral-100 transition-all ease-in-out cursor-pointer text-left w-full ${
-                selectedIndex === index ? "bg-neutral-100" : ""
-              }`}
+        {items.map((option, index) => {
+          if (selectedIndex === index) {
+            slashListRef.current[selectedIndex]?.scrollIntoView({
+              block: "nearest",
+            });
+          }
+
+          return (
+            <li
+              key={option.label}
+              ref={(element) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
+                slashListRef.current[index] = element;
+              }}
             >
-              {option.icon}
-              <div>
-                <p className="text-sm font-semibold">{option.label}</p>
-                <p className="text-xs">{option.subText}</p>
-              </div>
-            </button>
-          </li>
-        ))}
+              <button
+                type="button"
+                onClick={() => selectItem(index)}
+                className={`text-black flex items-center gap-x-4 px-4 py-2 hover:bg-neutral-100 transition-all ease-in-out cursor-pointer text-left w-full ${
+                  selectedIndex === index ? "bg-neutral-100" : ""
+                }`}
+              >
+                {option.icon}
+                <div>
+                  <p className="text-sm font-medium">{option.label}</p>
+                  <p className="text-xs text-neutral-500">{option.subText}</p>
+                </div>
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -163,11 +206,9 @@ const CommandList = forwardRef<
 const SlashCommand = Commands.configure({
   suggestion: {
     items: ({ query }: { query: string }) => {
-      return slashCommandList
-        .filter((item) =>
-          item.label.toLowerCase().startsWith(query.toLowerCase())
-        )
-        .slice(0, 5);
+      return slashCommandList.filter((item) =>
+        item.label.toLowerCase().startsWith(query.toLowerCase())
+      );
     },
     render: () => {
       let popup: TippyInstance[];
