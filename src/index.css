@@ -19,3 +19,10 @@ body {
 .prose ul[data-type="taskList"] {
   @apply pl-0;
 }
+
+.tippy-box {
+  background-color: #ffffff !important;
+}
+.tippy-arrow {
+  display: none !important;
+}

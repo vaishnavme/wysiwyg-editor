@@ -1,4 +1,4 @@
-import { Editor, Extension as TiptapExtension } from "@tiptap/core"; // Adjust according to your setup
+import { Editor } from "@tiptap/core"; // Adjust according to your setup
 import {
   Blockquote,
   Bold,
@@ -15,11 +15,7 @@ import {
   Underline,
 } from "./StyleToogles";
 import { extensionMap } from "../utils/constants";
-import { ExtensionKey } from "../utils/editor.types";
-
-interface Extension extends TiptapExtension {
-  name: ExtensionKey;
-}
+import { getActiveExtensions } from "../utils/helpers";
 
 interface Props {
   editor: Editor;
@@ -28,19 +24,7 @@ interface Props {
 const Toolbar = (props: Props) => {
   const { editor } = props;
 
-  const configuredExtension: Extension[] =
-    editor?.extensionManager?.extensions.filter((ext): ext is Extension =>
-      Object.prototype.hasOwnProperty.call(extensionMap, ext.name)
-    ) || [];
-
-  const activeExtensions = configuredExtension.reduce<
-    Record<ExtensionKey, Extension>
-  >((prev, curr) => {
-    if (extensionMap[curr.name]) {
-      prev[curr.name] = curr;
-    }
-    return prev;
-  }, {} as Record<ExtensionKey, Extension>);
+  const activeExtensions = getActiveExtensions(editor);
 
   return (
     <div className="sticky top-10 bg-white z-50 mb-20">
