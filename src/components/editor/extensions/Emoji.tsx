@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Editor, mergeAttributes, Node, Range } from "@tiptap/core";
 import { EditorState, PluginKey } from "@tiptap/pm/state";
 import { DOMOutputSpec, Node as ProseMirrorNode } from "@tiptap/pm/model";
@@ -177,6 +178,8 @@ const CommandList = forwardRef<CommandListRef, CommandListProps>(
   }
 );
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const EmojiCommand = Node.create<EmojiOptions>({
   name: "emoij",
   group: "inline",
@@ -184,8 +187,6 @@ const EmojiCommand = Node.create<EmojiOptions>({
   selectable: false,
   atom: true,
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   addOptions() {
     return {
       HTMLAttributes: {},
@@ -454,6 +455,8 @@ const Emoji = EmojiCommand.configure({
             popup[0].hide();
             return true;
           }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           return component.ref?.onKeyDown(props) ?? false;
         },
 
