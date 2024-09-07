@@ -5,6 +5,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 import SlashCommand from "./SlashCommand";
+import Emoji from "./Emoji";
 
 const extensions = [
   StarterKit.configure({
@@ -16,6 +17,7 @@ const extensions = [
   TaskList,
   Underline,
   SlashCommand,
+  Emoji,
   TextAlign.configure({
     alignments: ["left", "right", "center"],
     types: ["heading", "paragraph"],
