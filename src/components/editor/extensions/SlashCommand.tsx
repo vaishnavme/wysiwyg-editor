@@ -80,7 +80,7 @@ const slashCommandList: SlashCommand[] = [
 ];
 
 const Commands = Extension.create({
-  name: "commands",
+  name: "slash",
 
   addOptions() {
     return {
