@@ -1,11 +1,17 @@
-import { EditorContent, useEditor } from "@tiptap/react";
-import extensions from "./extensions";
+import {
+  Editor as TipTapEditor,
+  EditorContent,
+  useEditor,
+} from "@tiptap/react";
+import { editorMode, getEditorExtensionsByType } from "./extensions";
 import { forwardRef, useImperativeHandle } from "react";
 import Toolbar from "./toolbar/Toolbar";
 import { content } from "./utils/content";
 
 interface EditorProps {
   editable?: boolean;
+  editorType: editorMode;
+  onUpdate: (editor: TipTapEditor) => void;
 }
 
 export interface EditorRef {
@@ -15,7 +21,9 @@ export interface EditorRef {
 }
 
 const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
-  const { editable = true } = props;
+  const { editable = true, editorType } = props;
+
+  const extensions = getEditorExtensionsByType(editorType);
 
   const editor = useEditor({
     extensions,

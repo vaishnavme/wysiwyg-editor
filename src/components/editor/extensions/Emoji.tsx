@@ -267,7 +267,7 @@ const EmojiCommand = Node.create<EmojiOptions>({
           }
 
           return {
-            "data-name": attributes.name,
+            "data-label": attributes.name,
           };
         },
       },
@@ -290,7 +290,7 @@ const EmojiCommand = Node.create<EmojiOptions>({
   parseHTML() {
     return [
       {
-        tag: `span[data-type="${this.name}"]`,
+        tag: `span[data-role="img"]`,
       },
     ];
   },
@@ -300,7 +300,7 @@ const EmojiCommand = Node.create<EmojiOptions>({
       return [
         "span",
         mergeAttributes(
-          { "data-type": this.name },
+          { "data-role": "img" },
           this.options.HTMLAttributes,
           HTMLAttributes
         ),
@@ -313,7 +313,7 @@ const EmojiCommand = Node.create<EmojiOptions>({
     const mergedOptions = { ...this.options };
 
     mergedOptions.HTMLAttributes = mergeAttributes(
-      { "data-type": this.name },
+      { role: "img" },
       this.options.HTMLAttributes,
       HTMLAttributes
     );
@@ -326,7 +326,7 @@ const EmojiCommand = Node.create<EmojiOptions>({
       return [
         "span",
         mergeAttributes(
-          { "data-type": this.name },
+          { role: "img" },
           this.options.HTMLAttributes,
           HTMLAttributes
         ),
