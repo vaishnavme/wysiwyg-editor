@@ -7,6 +7,7 @@ import { editorMode, getEditorExtensionsByType } from "./extensions";
 import { forwardRef, useImperativeHandle } from "react";
 import Toolbar from "./toolbar/Toolbar";
 import { content } from "./utils/content";
+import BubbleMenu from "./toolbar/BubbleMenu";
 
 interface EditorProps {
   editable?: boolean;
@@ -54,6 +55,7 @@ const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
   return (
     <div>
       <Toolbar editor={editor} />
+      <BubbleMenu editor={editor} />
       <EditorContent editor={editor} />
     </div>
   );

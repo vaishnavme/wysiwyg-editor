@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toggle": "^1.1.0",
     "@tiptap/core": "^2.6.6",
+    "@tiptap/extension-bubble-menu": "^2.7.2",
     "@tiptap/extension-code-block-lowlight": "^2.7.1",
     "@tiptap/extension-link": "^2.6.6",
     "@tiptap/extension-mention": "^2.6.6",
