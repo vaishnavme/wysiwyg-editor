@@ -33,3 +33,7 @@ body {
 pre code {
   font-weight: 400 !important;
 }
+
+div.tippy-content {
+  padding: 0px;
+}
