@@ -26,3 +26,10 @@ body {
 .tippy-arrow {
   display: none !important;
 }
+
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: #0d0d0d;
+}
+pre code {
+  font-weight: 400 !important;
+}

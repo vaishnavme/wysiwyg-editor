@@ -2,8 +2,10 @@ import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import { Link as TiptapLink } from "@tiptap/extension-link";
 import { TextAlign as TipTapTextAlign } from "@tiptap/extension-text-align";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
+import { all, createLowlight } from "lowlight";
 import SlashCommand from "./SlashCommand";
 import Emoji from "./Emoji";
 
@@ -21,6 +23,12 @@ const TextAlign = TipTapTextAlign.configure({
   types: ["heading", "paragraph"],
 });
 
+const lowlight = createLowlight(all);
+
+const CodeBlock = CodeBlockLowlight.configure({
+  lowlight,
+});
+
 const minimalExtensionSet = [StarterKit, Link];
 
 const fullFeaturedExtensionSet = [
@@ -28,6 +36,7 @@ const fullFeaturedExtensionSet = [
     heading: {
       levels: [1, 2, 3],
     },
+    codeBlock: false,
   }),
   TaskItem,
   TaskList,
@@ -36,6 +45,7 @@ const fullFeaturedExtensionSet = [
   Emoji,
   Link,
   TextAlign,
+  CodeBlock,
 ];
 
 const defaultExtensionSet = [StarterKit, Link, TaskItem, TaskList];
