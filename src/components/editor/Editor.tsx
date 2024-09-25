@@ -12,7 +12,7 @@ import BubbleMenu from "./toolbar/BubbleMenu";
 interface EditorProps {
   editable?: boolean;
   editorType: editorMode;
-  onUpdate: (editor: TipTapEditor) => void;
+  onUpdate?: (editor: TipTapEditor) => void;
 }
 
 export interface EditorRef {
@@ -22,11 +22,14 @@ export interface EditorRef {
 }
 
 const Editor = forwardRef<EditorRef, EditorProps>((props, ref) => {
-  const { editable = true, editorType } = props;
+  const { editable = true, editorType, onUpdate } = props;
 
   const extensions = getEditorExtensionsByType(editorType);
 
   const editor = useEditor({
+    onUpdate: ({ editor }) => {
+      if (onUpdate) onUpdate(editor);
+    },
     extensions,
     editable,
     content,
