@@ -8,6 +8,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { all, createLowlight } from "lowlight";
 import SlashCommand from "./SlashCommand";
 import Emoji from "./Emoji";
+import Mention from "./Mention";
 
 const Link = TiptapLink.extend({ inclusive: false }).configure({
   autolink: true,
@@ -46,6 +47,7 @@ const fullFeaturedExtensionSet = [
   Link,
   TextAlign,
   CodeBlock,
+  Mention,
 ];
 
 const defaultExtensionSet = [StarterKit, Link, TaskItem, TaskList];

@@ -37,3 +37,9 @@ pre code {
 div.tippy-content {
   padding: 0px;
 }
+
+.mention {
+  color: #a78bfa;
+  font-weight: 500;
+  text-decoration: underline;
+}
